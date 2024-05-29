@@ -3,10 +3,10 @@ const app = express();
 const request = require('request');
 const wikip = require('wiki-infobox-parser');
 
-//ejs
+// EJS
 app.set("view engine", 'ejs');
 
-//routes
+// Routes
 app.get('/', (req, res) => {
     res.render('index');
 });
@@ -21,33 +21,39 @@ app.get('/index', (req, response) => {
         format: "json"
     }
 
-    url = url + "?"
+    url = url + "?";
     Object.keys(params).forEach((key) => {
         url += '&' + key + '=' + params[key];
     });
 
-    //get wikip search string
+    // Get Wikipedia search string
     request(url, (err, res, body) => {
         if (err) {
             response.redirect('404');
         }
+
         result = JSON.parse(body);
         x = result[3][0];
         x = x.substring(30, x.length);
-        //get wikip json
+
+        // Get Wikipedia JSON
         wikip(x, (err, final) => {
             if (err) {
                 response.redirect('404');
-            }
-            else {
+            } else {
                 const answers = final;
                 response.send(answers);
             }
         });
     });
-
-
 });
 
-//port
-app.listen(3000, console.log("Listening at port 3000..."))
+function startServer() {
+    return app.listen(0, () => {
+        console.log(`Server is running on port ${server.address().port}`);
+    });
+}
+
+const server = startServer();
+
+module.exports = { app, server };
