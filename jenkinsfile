@@ -10,7 +10,7 @@ pipeline {
                 
                 // Create artifact (e.g., ZIP, JAR, Docker image, etc.)
                 // Replace the artifact name and location with your actual artifact
-                archiveArtifacts artifacts: 'dist/*', fingerprint: true
+                archiveArtifacts artifacts: '**/*', fingerprint: true
             }
         }
         

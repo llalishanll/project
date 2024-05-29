@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "test": "mocha",
+=======
+    "test": "echo \"Error: no test specified\" && exit 1",
+>>>>>>> 0e117b8e3b2de2f3368fb6496a92212b869ed8a6
     "build": "echo \"Build successful\""
   },
   "author": "",
