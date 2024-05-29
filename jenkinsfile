@@ -21,7 +21,6 @@ pipeline {
             steps {
                 // Run automated tests
                 sh 'npm test'
-                
             }
         }
         
