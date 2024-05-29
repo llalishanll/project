@@ -21,7 +21,6 @@ pipeline {
             steps {
                 // Run automated tests
                 sh 'npm test'
-                
             }
         }
         
@@ -37,18 +36,6 @@ pipeline {
                 }
             }
         }
-        
-        stage('Deploy') {
-            steps {
-                // Perform deployment tasks here
-                // This could involve copying artifacts to a server, deploying a Docker image, etc.
-            }
-        }
-        
-        stage('Release') {
-            steps {
-                // Additional release steps if needed
-            }
-        }
+       
     }
 }
