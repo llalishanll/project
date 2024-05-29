@@ -4,9 +4,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                // Checkout code from GitHub
-                git 'https://github.com/llalishanll/project.git'
-                
                 // Install dependencies and build artifact
                 sh 'npm install'
                 sh 'npm run build'
