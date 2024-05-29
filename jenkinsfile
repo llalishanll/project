@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Build') {
+            steps {
+                // Checkout code from GitHub
+                git 'https://github.com/llalishanll/project.git'
+                
+                // Install dependencies and build artifact
+                sh 'npm install'
+                sh 'npm run build'
+                
+                // Create artifact (e.g., ZIP, JAR, Docker image, etc.)
+                // Replace the artifact name and location with your actual artifact
+                archiveArtifacts artifacts: 'dist/*', fingerprint: true
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                // Run automated tests
+                sh 'npm test'
+                
+            }
+        }
+        
+        stage('Code Quality Analysis') {
+            steps {
+                // Run code quality analysis (e.g., with SonarQube)
+                // Replace with your actual SonarQube server details
+                // You need to have SonarQube server configured in Jenkins
+                // You also need to have the SonarQube Scanner installed in your Jenkins environment
+                // This assumes your project has a sonar-project.properties file in the root
+                withSonarQubeEnv('Your_SonarQube_Server_Name') {
+                    sh 'sonar-scanner'
+                }
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                // Perform deployment tasks here
+                // This could involve copying artifacts to a server, deploying a Docker image, etc.
+            }
+        }
+        
+        stage('Release') {
+            steps {
+                // Additional release steps if needed
+            }
+        }
+    }
+}
