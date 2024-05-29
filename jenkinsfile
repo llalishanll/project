@@ -20,14 +20,19 @@ pipeline {
                 bat 'npm test' // Resolved conflict
             }
         }
+
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    def scannerHome = tool 'SonarQube Scanner'
+                    bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=my-nodejs-project -Dsonar.sources=. -Dsonar.host.url=http://my-sonarqube-server -Dsonar.login=my-sonarqube-token"
+                }
+            }
+        }
         
         stage('Deploy to Dockers') {
             steps {
-                // Run code quality analysis (e.g., with SonarQube)
-                // Replace with your actual SonarQube server details
-                // You need to have SonarQube server configured in Jenkins
-                // You also need to have the SonarQube Scanner installed in your Jenkins environment
-                // This assumes your project has a sonar-project.properties file in the root
+                // Build the Docker image
                 bat 'docker build -t nodejs-app:latest .'
             }
         }
