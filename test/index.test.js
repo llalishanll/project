@@ -1,12 +1,12 @@
-import chai from 'chai';
-import chaiHttp from 'chai-http';
+const chai = require('chai');
+const chaiHttp = require('chai-http');
 
 // Configure chai
 chai.use(chaiHttp);
 const expect = chai.expect;
 
 // Assuming your app is exported as a default module
-import app from '../index';
+const app = require('../index').default;
 
 describe('GET /', () => {
     it('responds with HTML containing "Person\'s name..."', (done) => {
