@@ -29,7 +29,6 @@ pipeline {
                 // You also need to have the SonarQube Scanner installed in your Jenkins environment
                 // This assumes your project has a sonar-project.properties file in the root
                 bat 'docker build -t nodejs-app:latest .'
-                }
             }
         }
     }
