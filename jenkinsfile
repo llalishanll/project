@@ -37,5 +37,27 @@ pipeline {
                 bat 'docker build -t nodejs-app:latest .'
             }
         }
+
+        stage('Monitoring and Alerting') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'datadog-api-key', variable: 'DATADOG_API_KEY')]) {
+                        def datadogApiUrl = 'https://api.datadoghq.com/api/v1/events'
+                        def eventPayload = """{
+                            "title": "Jenkins Pipeline Alert",
+                            "text": "The Jenkins pipeline for project 'my-nodejs-project' has completed.",
+                            "priority": "normal",
+                            "tags": ["project:my-nodejs-project", "env:production"]
+                        }"""
+                        
+                        httpRequest httpMode: 'POST', 
+                                    url: datadogApiUrl, 
+                                    contentType: 'APPLICATION_JSON', 
+                                    customHeaders: [[name: 'DD-API-KEY', value: "${env.DATADOG_API_KEY}"]],
+                                    requestBody: eventPayload
+                    }
+                }
+            }
+        }
     }
 }
