@@ -4,12 +4,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                // Checkout code from GitHub
-                git 'https://github.com/llalishanll/project.git'
-                
                 // Install dependencies and build artifact
-                sh 'npm install'
-                sh 'npm run build'
+                bat 'npm install'
+                bat 'npm run build'
                 
                 // Create artifact (e.g., ZIP, JAR, Docker image, etc.)
                 // Replace the artifact name and location with your actual artifact
@@ -20,7 +17,11 @@ pipeline {
         stage('Test') {
             steps {
                 // Run automated tests
+<<<<<<< HEAD
                 sh 'npm test'
+=======
+                bat 'npm test'
+>>>>>>> b317fe3a8e26443bbc7bd185b954a3e2f2294d1c
             }
         }
         
@@ -32,10 +33,13 @@ pipeline {
                 // You also need to have the SonarQube Scanner installed in your Jenkins environment
                 // This assumes your project has a sonar-project.properties file in the root
                 withSonarQubeEnv('Your_SonarQube_Server_Name') {
-                    sh 'sonar-scanner'
+                    bat 'sonar-scanner'
                 }
             }
         }
+<<<<<<< HEAD
        
+=======
+>>>>>>> b317fe3a8e26443bbc7bd185b954a3e2f2294d1c
     }
 }

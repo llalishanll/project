@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "build": "echo \"Build successful\""
   },
   "author": "",
@@ -15,5 +15,10 @@
     "node-fetch": "^3.3.2",
     "request": "^2.88.2",
     "wiki-infobox-parser": "^0.1.11"
+  },
+  "devDependencies": {
+    "chai": "^5.1.1",
+    "chai-http": "^4.4.0",
+    "mocha": "^10.4.0"
   }
 }
