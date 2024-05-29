@@ -24,7 +24,8 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    def scannerHome = tool 'SonarQube Scanner'
+                    // Make sure this matches the name configured in Jenkins
+                    def scannerHome = tool 'SonarQube_Scanner'
                     bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=my-nodejs-project -Dsonar.sources=. -Dsonar.host.url=http://my-sonarqube-server -Dsonar.login=my-sonarqube-token"
                 }
             }
