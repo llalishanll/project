@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha", // Resolved conflict
+    "test": "mocha",
     "build": "echo \"Build successful\""
   },
   "author": "",
