@@ -17,11 +17,7 @@ pipeline {
         stage('Test') {
             steps {
                 // Run automated tests
-<<<<<<< HEAD
-                sh 'npm test'
-=======
-                bat 'npm test'
->>>>>>> b317fe3a8e26443bbc7bd185b954a3e2f2294d1c
+                bat 'npm test' // Resolved conflict
             }
         }
         
@@ -37,9 +33,5 @@ pipeline {
                 }
             }
         }
-<<<<<<< HEAD
-       
-=======
->>>>>>> b317fe3a8e26443bbc7bd185b954a3e2f2294d1c
     }
 }
