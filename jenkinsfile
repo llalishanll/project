@@ -9,7 +9,6 @@ pipeline {
                 bat 'npm run build'
                 
                 // Create artifact (e.g., ZIP, JAR, Docker image, etc.)
-                // Replace the artifact name and location with your actual artifact
                 archiveArtifacts artifacts: '**/*', fingerprint: true
             }
         }
@@ -17,16 +16,17 @@ pipeline {
         stage('Test') {
             steps {
                 // Run automated tests
-                bat 'npm test' // Resolved conflict
+                bat 'npm test'
             }
         }
 
         stage('SonarQube Analysis') {
+            environment {
+                SONAR_SCANNER_HOME = tool 'SonarQube_Scanner'
+            }
             steps {
-                script {
-                    // Make sure this matches the name configured in Jenkins
-                    def scannerHome = tool 'SonarQube_Scanner'
-                    bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=my-nodejs-project -Dsonar.sources=. -Dsonar.host.url=http://my-sonarqube-server -Dsonar.login=my-sonarqube-token"
+                withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+                    bat "${env.SONAR_SCANNER_HOME}\\bin\\sonar-scanner -Dsonar.projectKey=my-nodejs-project -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${env.SONAR_TOKEN}"
                 }
             }
         }
