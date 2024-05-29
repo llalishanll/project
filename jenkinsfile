@@ -21,15 +21,14 @@ pipeline {
             }
         }
         
-        stage('Code Quality Analysis') {
+        stage('Deploy to Dockers') {
             steps {
                 // Run code quality analysis (e.g., with SonarQube)
                 // Replace with your actual SonarQube server details
                 // You need to have SonarQube server configured in Jenkins
                 // You also need to have the SonarQube Scanner installed in your Jenkins environment
                 // This assumes your project has a sonar-project.properties file in the root
-                withSonarQubeEnv('Your_SonarQube_Server_Name') {
-                    bat 'sonar-scanner'
+                bat 'docker build -t nodejs-app:latest .'
                 }
             }
         }
